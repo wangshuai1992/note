@@ -1,0 +1,65 @@
+﻿
+<script type="text/javascript">
+	$(function() {
+		$('#close_modifynote').click(function() {
+			$('#can').hide();
+			$('.opacity_bg').hide();
+		});
+	});
+	
+	$(function() {
+		$('#cancle').click(function() {
+			$('#can').hide();
+			$('.opacity_bg').hide();
+		});
+	});
+	
+	$(function() {
+		$('#cancle_modifynote').click(function() {
+			clearAndCloseEditDiv();
+			
+			$("#is_modified").hide();
+			$('#can').hide();
+			$('.opacity_bg').hide();
+		});
+	});
+	
+	$(function() {
+		$('#sure_modifynote').click(function() {
+			$("#save_note").click();
+			
+			clearAndCloseEditDiv();
+
+			$("#is_modified").hide();
+			$('#can').hide();
+			$('.opacity_bg').hide();
+		});
+	});
+</script>
+
+<div class="modal fade in" id="modalBasic_2" tabindex="-1" role="dialog"
+	aria-labelledby="modalBasicLabel" aria-hidden="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true" id="close_modifynote">×</button>
+				<h4 class="modal-title" id="modalBasicLabel_2">保存笔记修改</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label class="col-sm-3 control-label" id="confirm_modify_msg"
+						style='margin-top:0px;width: 80%'></label>
+				</div>
+			</div>
+			<div class="modal-footer" style='margin-top:20px;'>
+				<button type="button" class="btn btn-default cancle"
+					data-dismiss="modal" id="cancle">取   消</button>
+				<button type="button" class="btn btn-default cancle"
+					data-dismiss="modal" id="cancle_modifynote">不保存</button>
+				<button type="button" class="btn btn-primary sure"
+					id="sure_modifynote">保   存</button>
+			</div>
+		</div>
+	</div>
+</div>

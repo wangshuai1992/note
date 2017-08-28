@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangshuai.note.dao.UserMapperDAO">
+    <select id="findAll" resultType="userDO">
+        SELECT *
+        FROM cn_user;
+    </select>
+
+    <select id="findByName" parameterType="string"
+            resultType="userDO">
+        SELECT *
+        FROM cn_user
+        WHERE cn_user_name = #{name}
+    </select>
+
+    <select id="findById" parameterType="string"
+            resultType="userDO">
+        SELECT *
+        FROM cn_user
+        WHERE cn_user_id = #{id}
+    </select>
+
+    <select id="findByBookId" parameterType="string"
+            resultType="userDO">
+        SELECT
+            u.cn_user_id,
+            cn_user_name,
+            cn_user_password,
+            cn_user_token,
+            cn_user_desc
+        FROM cn_user u
+            JOIN cn_notebook n
+                ON u.cn_user_id = n.cn_user_id
+        WHERE n.cn_notebook_id = #{bookId}
+    </select>
+
+    <insert id="save" parameterType="userDO">
+        INSERT INTO cn_user
+        VALUES (#{cn_user_id}, #{cn_user_name}, #{cn_user_password},
+                #{cn_user_token}, #{cn_user_desc})
+    </insert>
+
+    <update id="update" parameterType="userDO">
+        update cn_user
+        <set>
+            <if test="cn_user_password != null">
+                cn_user_password = #{cn_user_password},
+            </if>
+            <if test="cn_user_token != null">
+                cn_user_token = #{cn_user_token},
+            </if>
+            <if test="cn_user_desc != null">
+                cn_user_desc = #{cn_user_desc},
+            </if>
+        </set>
+        <where>
+            <if test="cn_user_name != null">
+                and cn_user_name = #{cn_user_name}
+            </if>
+            <if test="cn_user_id != null">
+                and cn_user_id = #{cn_user_id}
+            </if>
+        </where>
+    </update>
+
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangshuai.note.dao.SharedNoteMapperDAO">
+    <select id="findNotesLike" parameterType="string" resultType="sharedNoteDO">
+        SELECT *
+        FROM cn_share
+        WHERE cn_share_title LIKE #{key} OR cn_share_body LIKE #{key}
+    </select>
+
+    <insert id="save" parameterType="sharedNoteDO">
+        INSERT INTO cn_share VALUES (
+            #{cn_share_id}, #{cn_share_title}, #{cn_share_body}, #{cn_note_id}
+        )
+    </insert>
+
+    <update id="updateByNoteId" parameterType="sharedNoteDO">
+        update cn_share
+        <set>
+            <if test="cn_share_title != null">
+                cn_share_title = #{cn_share_title},
+            </if>
+            <if test="cn_share_body != null">
+                cn_share_body = #{cn_share_body},
+            </if>
+        </set>
+        where cn_note_id = #{cn_note_id}
+    </update>
+
+    <delete id="deleteByNoteId" parameterType="string">
+        DELETE FROM cn_share
+        WHERE cn_note_id = #{noteId}
+    </delete>
+</mapper>

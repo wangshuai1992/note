@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+
+.mydiv {
+	background: transparent url("../images/my/index_bg.png") no-repeat
+		scroll center top/cover;
+	background-color: transparent;
+	background-image: url("../images/my/index_bg.png");
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center top;
+	background-clip: border-box;
+	background-origin: padding-box;
+	background-size: cover;
+	height: 480px;
+}
+
+.myslogan {
+	background: transparent
+		url("../images/my/YnoteSlogan.png")
+		no-repeat scroll 0% 0%;
+	background-color: transparent;
+	background-image:
+		url("../images/my/YnoteSlogan.png");
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 0% 0%;
+	background-clip: border-box;
+	background-origin: padding-box;
+	background-size: auto auto;
+	position: relative;
+	top: 35%;
+	left: 30%;
+	height: 117px;
+	width: 340px;
+}
+
+.mybody {
+	background: transparent url("../images/my/index_bg.png") no-repeat
+		scroll center top/cover;
+	background-color: transparent;
+	background-image: url("../images/my/index_bg.png");
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center top;
+	background-clip: border-box;
+	background-origin: padding-box;
+	background-size: auto;
+}

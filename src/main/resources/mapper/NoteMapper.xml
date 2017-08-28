@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangshuai.note.dao.NoteMapperDAO">
+    <select id="findAll" resultType="noteDO">
+        SELECT *
+        FROM cn_note;
+    </select>
+
+    <select id="findByNoteId" resultType="noteDO">
+        SELECT *
+        FROM cn_note
+        WHERE
+            cn_note_id = #{noteId}
+    </select>
+
+    <select id="findByNoteBookId" parameterType="string"
+            resultType="noteDO">
+        SELECT *
+        FROM cn_note
+        WHERE cn_notebook_id = #{bookId}
+        ORDER
+        BY cn_note_create_time DESC
+    </select>
+
+    <select id="findTrashedNotesByUserId" parameterType="string"
+            resultType="noteDO">
+        SELECT *
+        FROM cn_note
+        WHERE cn_user_id = #{userId} AND cn_note_status_id = "0"
+        ORDER
+        BY cn_note_last_modify_time DESC
+    </select>
+
+    <insert id="save" parameterType="noteDO">
+        INSERT INTO cn_note VALUES (
+            #{cn_note_id}, #{cn_notebook_id}, #{cn_user_id}, #{cn_note_status_id},
+            #{cn_note_type_id}, #{cn_note_title},
+            #{cn_note_body},
+            #{cn_note_create_time}, #{cn_note_last_modify_time}
+        )
+    </insert>
+
+    <update id="updateById" parameterType="noteDO">
+        update cn_note
+        <set>
+            <if test="cn_note_status_id != null">
+                cn_note_status_id = #{cn_note_status_id},
+            </if>
+            <if test="cn_note_type_id != null">
+                cn_note_type_id = #{cn_note_type_id},
+            </if>
+            <if test="cn_note_title != null">
+                cn_note_title = #{cn_note_title},
+            </if>
+            <if test="cn_note_body != null">
+                cn_note_body = #{cn_note_body},
+            </if>
+            <if test="cn_note_last_modify_time != null">
+                cn_note_last_modify_time = #{cn_note_last_modify_time},
+            </if>
+        </set>
+        where cn_note_id = #{cn_note_id}
+    </update>
+
+    <delete id="deleteByBookId" parameterType="string">
+        DELETE FROM cn_note
+        WHERE cn_notebook_id = #{bookId}
+    </delete>
+
+    <delete id="deleteNoteById" parameterType="string">
+        DELETE FROM cn_note
+        WHERE cn_note_id = #{noteId}
+    </delete>
+
+</mapper>
